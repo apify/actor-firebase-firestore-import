@@ -16,7 +16,7 @@ List of input settings for the actor. You can also look into the input tab.
 ### Transformation Function 
 You can optionally apply a transformation to your data before importing it. Use TypeScript/JavaScript to mold your data exactly how you need it! It must be an anonymous function that accepts a single parameter and returns the transformed value. Here are some examples:
 ```javascript
-(data) => {
+function(data) {
     // Customize your data transformation
     data.newField = 'new value';
     return data;
@@ -24,8 +24,8 @@ You can optionally apply a transformation to your data before importing it. Use 
 ```
 or
 ```javascript
-function(data) {
-    // Another example of data transformation
+(data) => {
+    // Another example of data transformation using arrow function
     data.newField = 'new value';
     return data;
 }
