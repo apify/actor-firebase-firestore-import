@@ -1,0 +1,50 @@
+{
+    "title": "Import dataset to Firebase Firestore",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "apiKey": {
+            "title": "API key to Firebase",
+            "type": "string",
+            "description": "API key to Firebase",
+            "editor": "textfield"
+        },
+        "authDomain": {
+            "title": "Auth domain to Firebase",
+            "type": "string",
+            "description": "Auth domain to Firebase",
+            "editor": "textfield"
+        },
+        "projectId": {
+            "title": "Project ID to Firebase",
+            "type": "string",
+            "description": "Project ID to Firebase",
+            "editor": "textfield"
+        },
+        "firestoreCollectionId": {
+            "title": "Firestore collection ID",
+            "type": "string",
+            "description": "Firestore collection ID",
+            "editor": "textfield"
+        },
+        "datasetId": {
+            "title": "Dataset ID in Apify to import data from",
+            "type": "string",
+            "description": "Dataset ID in Apify to import data from",
+            "editor": "textfield"
+        },
+        "transformFunction": {
+            "title": "Transform function",
+            "type": "string",
+            "description": "Transform function",
+            "editor": "javascript"
+        }
+    },
+    "required": [
+        "apiKey",
+        "authDomain",
+        "projectId",
+        "firestoreCollectionId",
+        "datasetId"
+    ]
+}
