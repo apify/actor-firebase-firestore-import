@@ -24,19 +24,19 @@
         "firestoreCollectionId": {
             "title": "Firestore collection ID",
             "type": "string",
-            "description": "Firestore collection ID",
+            "description": "Firestore collection ID to import data to.",
             "editor": "textfield"
         },
         "datasetId": {
             "title": "Dataset ID in Apify to import data from",
             "type": "string",
-            "description": "Dataset ID in Apify to import data from",
+            "description": "Dataset ID in Apify to import data from.",
             "editor": "textfield"
         },
         "transformFunction": {
             "title": "Transform function",
             "type": "string",
-            "description": "Transform function",
+            "description": "Optional transform function to modify data before import. For more info see README.",
             "editor": "javascript"
         }
     },

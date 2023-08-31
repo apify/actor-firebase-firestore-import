@@ -56,7 +56,7 @@ const transformFunctionEvaluated = transformFunction && eval(transformFunction);
 // Check if transform function is correctly defined
 if (typeof transformFunctionEvaluated != 'function') {
     await Actor.exit();
-    throw new Error('Transform function is not correctly defined! The specification of the transform function is available in the readme.');
+    throw new Error('Transform function is not correctly defined! The specification of the transform function is available in the README.');
 }
 
 console.log(`Importing ${datesetSize} items to Firestore collection`);

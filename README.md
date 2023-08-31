@@ -1,17 +1,23 @@
-# Firebase Firestore import
 
-Imports data from Apify dataset to Firebase Firestore collection.
-Each items is imported as a new document in the collection.
+# 🔥 Firebase Firestore Data Import  
 
-## Input settings
-- **apiKey**:string - Firebase API key
-- **authDomain**:string - Firebase auth domain
-- **projectId**:string - Firebase project ID
-- **firestoreCollectionId**:string - Firestore collection ID
-- **datasetId**:string - Apify dataset ID
-- **transformFunction**:string (optional) - Function code in TypeScript/JavaScript that transforms the data before import. It must be an anonymous function that accepts a single parameter and returns the transformed value. See [example] ( 
+Import data from your Apify dataset into your Firebase Firestore collection! Each item will be transformed into a new document within the specified collection.
+
+## 🛠️ Input Settings
+
+List of input settings for the actor. You can also look into the input tab.
+- **apiKey**: Your Firebase API key 🔑
+- **authDomain**: Your Firebase authentication domain 🔒
+- **projectId**: Your Firebase project ID 🏢
+- **firestoreCollectionId**: The ID of the Firestore collection where you want to import the data 🗂️
+- **datasetId**: The ID of the Apify dataset you're importing from 📊
+- **transformFunction**: An optional custom transformation function, see [below 👇](#transformation-function) 
+
+### Transformation Function 
+You can optionally apply a transformation to your data before importing it. Use TypeScript/JavaScript to mold your data exactly how you need it! It must be an anonymous function that accepts a single parameter and returns the transformed value. Here are some examples:
 ```javascript
 (data) => {
+    // Customize your data transformation
     data.newField = 'new value';
     return data;
 }
@@ -19,17 +25,14 @@ Each items is imported as a new document in the collection.
 or
 ```javascript
 function(data) {
+    // Another example of data transformation
     data.newField = 'new value';
     return data;
 }
 ```
-) for more details.
 
-
-
-
-
-
+## 🚀 Let's Get Started!
+With these settings, your data will seamlessly flow from your Apify dataset into your Firebase Firestore collection. Use it manually or integrate it with another actor (for example via [Apify's Webhooks](https://docs.apify.com/platform/integrations/webhooks)) to automate the process).
 
 
 
