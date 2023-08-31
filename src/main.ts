@@ -14,7 +14,7 @@ interface IInput extends Record<string, any>{
 } 
 
 // Batch size for adding items to Firestore collection
-const BATCH_SIZE = 500;
+const BATCH_SIZE = 10;
 
 // The init() call configures the Actor for its environment. It's recommended to start every Actor with an init()
 await Actor.init();
