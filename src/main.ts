@@ -13,7 +13,7 @@ interface IInput extends Record<string, any>{
     transformFunction?: string;
 } 
 
-// Batch size for adding items to firestore collection
+// Batch size for adding items to Firestore collection
 const BATCH_SIZE = 500;
 
 // The init() call configures the Actor for its environment. It's recommended to start every Actor with an init()
@@ -34,7 +34,7 @@ const app = initializeApp({
     projectId,
 });
 
-// Get firestore instance
+// Get Firestore instance
 const db = getFirestore(app);
 
 // Get dataset
@@ -47,8 +47,8 @@ if(!datasetInfo){
 } 
 const datesetSize = datasetInfo.itemCount;
 
-// Get firestore collection reference
-console.log(`Opening firestore collection: ${firestoreCollectionId}`);
+// Get Firestore collection reference
+console.log(`Opening Firestore collection: ${firestoreCollectionId}`);
 const collectionRef = collection(db, firestoreCollectionId);
 
 // Prepare and check transform function
@@ -59,8 +59,8 @@ if (typeof transformFunctionEvaluated != 'function') {
     throw new Error('Transform function is not correctly defined! The specification of the transform function is available in the readme.');
 }
 
-console.log(`Importing ${datesetSize} items to firestore collection`);
-// Add all items from dataset to firestore collection in batches
+console.log(`Importing ${datesetSize} items to Firestore collection`);
+// Add all items from dataset to Firestore collection in batches
 for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
     // load batch of items from dataset
     const datasetData = await dataset.getData({
@@ -68,7 +68,7 @@ for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
         limit: BATCH_SIZE,
     })
 
-    // add batch of items to firestore collection
+    // add batch of items to Firestore collection
     for (let item of datasetData.items) {
         // transform item if transform function is defined
         if (transformFunctionEvaluated) {
