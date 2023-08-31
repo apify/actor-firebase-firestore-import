@@ -1,5 +1,5 @@
 {
-    "title": "Import dataset to Firebase Firestore",
+    "title": "Imports data from Apify dataset to Firebase Firestore",
     "type": "object",
     "schemaVersion": 1,
     "properties": {

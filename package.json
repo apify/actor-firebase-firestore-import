@@ -1,8 +1,8 @@
 {
-    "name": "firebase-import",
+    "name": "firebase-firestore-import",
     "version": "0.0.1",
     "type": "module",
-    "description": "Firebase Firestore import actor",
+    "description": "Imports data from Apify dataset to Firebase Firestore",
     "engines": {
         "node": ">=18.0.0"
     },

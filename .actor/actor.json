@@ -1,8 +1,8 @@
 {
     "actorSpecification": 1,
-    "name": "firebase-import",
-    "title": "Firebase import",
-    "description": "Firebase Firestore import actor",
+    "name": "firebase-firestore-import",
+    "title": "Firebase Firestore import",
+    "description": "Imports data from Apify dataset to Firebase Firestore",
     "version": "0.0",
     "buildTag": "latest",
     "input": "./input_schema.json",

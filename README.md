@@ -1,6 +1,6 @@
-# Firebase import
+# Firebase Firestore import
 
-Firebase Firestore import actor
+Imports data from Apify dataset to Firebase Firestore
 
 ## Input parameters
 
