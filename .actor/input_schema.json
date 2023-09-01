@@ -7,44 +7,50 @@
             "title": "API key to Firebase",
             "type": "string",
             "description": "Your API key to Firebase. It can be found in Firebase console under Project settings -> General -> Web API key.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "example": "AIzaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         },
         "authDomain": {
             "title": "Auth domain to Firebase",
             "type": "string",
             "description": "Your auth domain to Firebase. It can be found in Firebase console under Project settings -> Add app -> Web app -> Register app -> Code snippet -> authDomain.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "example": "my-app.firebaseapp.com"
         },
         "projectId": {
             "title": "Project ID to Firebase",
             "type": "string",
             "description": "Your project ID to Firebase. It can be found in Firebase console under Project settings -> General -> Project ID.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "example": "my-app"
         },
         "firestoreCollectionId": {
             "title": "Firestore collection ID",
             "type": "string",
             "description": "Firestore collection ID to import data to. It can be found in Firebase console under Firestore Database -> Data. Ensure that the Firestore permissions are set to allow read and write. If the collection does not exist, it will be created.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "example": "my-collection"
         },
         "datasetId": {
             "title": "Dataset ID in Apify to import data from",
             "type": "string",
             "description": "Dataset ID in Apify to import data from. It can be found in Apify console under Storage -> Datasets -> Dataset ID.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "example": "AjdfiLdklsHmdkKSd"
         },
         "customIdField": {
             "title": "Custom ID field",
             "type": "string",
             "description": "Optional field name to use as a document ID in Firestore. If not provided, the document ID will be generated automatically. It is applied after the transform function. In case of duplicate IDs, the document will be overwritten. Read more in README.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "example": "my-id-field"
         },
         "transformFunction": {
             "title": "Transform function",
             "type": "string",
             "description": "Optional transform function to modify data before import. For more info see README.",
             "editor": "javascript",
-            "prefill": "function (item) {\n    // Here you can modify the item before is inserted to Firestore\n    item;\n}"
+            "example": "function (item) { /* Your code here */ return item;}"
         }
     },
     "required": [
