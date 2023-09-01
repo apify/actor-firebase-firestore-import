@@ -42,6 +42,9 @@ log.info('Opening dataset', { datasetId });
 const dataset = await Actor.openDataset(datasetId, { forceCloud: true });
 const datasetInfo = await dataset.getInfo();
 
+console.log(datasetInfo);
+console.log(datasetInfo!.itemCount);
+
 // Check if dataset exists and is not empty
 if (!datasetInfo || !datasetInfo.itemCount) {
     await Actor.exit();
