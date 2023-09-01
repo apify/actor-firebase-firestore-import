@@ -24,7 +24,7 @@
         "firestoreCollectionId": {
             "title": "Firestore collection ID",
             "type": "string",
-            "description": "Firestore collection ID to import data to. It can be found in Firebase console under Firestore Database -> Data. Ensure that the Firebase permissions are set to allow read and write. If the collection does not exist, it will be created.",
+            "description": "Firestore collection ID to import data to. It can be found in Firebase console under Firestore Database -> Data. Ensure that the Firestore permissions are set to allow read and write. If the collection does not exist, it will be created.",
             "editor": "textfield"
         },
         "datasetId": {

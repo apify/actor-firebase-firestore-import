@@ -8,7 +8,7 @@ To use the Apify Firestore Import Actor, you need to provide the necessary confi
 
 ## What is Firebase? 🔥
 
-**Firebase** is a comprehensive mobile and web application development platform powered by Google. It offers a wide range of tools and services to help developers build high-quality apps, including authentication, real-time database, cloud storage, and more. Firebase is known for its scalability, reliability, and ease of use, making it a popular choice for building modern applications. 📱
+**Firebase** is a comprehensive mobile and web application development platform powered by Google. It offers a wide range of tools and services to help developers build high-quality apps, including authentication, real-time database, cloud storage, and more. Firebase is known for its scalability, reliability, and ease of use, making it a popular choice for building modern applications.
 
 ## What is Firestore? 📝
 
@@ -24,7 +24,7 @@ The actor accepts the following input settings:
 | `apiKey`                       | Your API key to Firebase. It can be found in Firebase console under **Project settings** -> **General** -> **Web API key**.                                                                                                                                                                                            |
 | `authDomain`                   | Your auth domain to Firebase. It can be found in Firebase console under **Project settings** -> **Add app** -> **Web app** -> **Register app** -> **Code snippet** -> **Code snippet**.                                                                                                                                |
 | `projectId`                    | Your project ID to Firebase. It can be found in Firebase console under **Project settings** -> **General** -> **Project ID**.                                                                                                                                                                                          |
-| `firestoreCollectionId`        | Firestore collection ID to import data to. It can be found in Firebase console under **Firestore Database** -> **Data**. Ensure that the Firebase permissions are set to allow read and write. If the collection does not exist, it will be created.                                                                   |
+| `firestoreCollectionId`        | Firestore collection ID to import data to. It can be found in Firebase console under **Firestore Database** -> **Data**. Ensure that the FireStore permissions are set to allow read and write. If the collection does not exist, it will be created.                                                                  |
 | `datasetId`                    | Dataset ID in Apify to import data from. It can be found in Apify console under **Storage** -> **Datasets** -> **Dataset ID**.                                                                                                                                                                                         |
 | `customIdField` (optional)     | Name of the field in the dataset to use as the document ID in Firestore. If not specified, Firestore will automatically generate a unique ID for each document. Note that this field must be unique for each item in the dataset or the document will be overwritten. It is applied after the transformation function. |
 | `transformFunction` (optional) | An optional custom transformation function to apply to the data before importing it. To learn more about this, see [below](#transformation-function).                                                                                                                                                                  |
@@ -61,11 +61,11 @@ To unleash the power of the **Firebase Firestore Import Actor**, follow these st
 2. 📝 Enter your Firebase API key, authentication domain, project ID, Firestore collection ID, and Apify dataset ID in the input settings.
 3. ⚙️ Optionally, provide a custom transformation function if needed or specify a custom ID field to serve as the document ID in Firestore.
 4. 🏃‍♂️ Click on "Run" to initiate the import process.
-5. 🎉 Once the actor has completed its magic, you can either preview or download the imported data from the Dataset tab.
+5. 🎉 That's it! Sit back and relax while the actor works its magic. Once the actor finishes processing the data, you can view the data in your Firestore collection.
 
 ## Results 📦
 
-The Firebase Firestore Import Actor will work its magic by transforming each item in the Apify dataset into a new document within the specified Firestore collection. The exact structure of these resulting documents will depend on the data in the dataset and any custom transformations applied.
+The Firebase Firestore Import Actor will import each item in the Apify dataset as a new document within the specified Firestore collection. The exact structure of these resulting documents will depend on the data in the dataset and any custom transformations applied. The IDs of the documents will be automatically generated by Firestore, unless a custom ID field is specified.
 
 ## Tips for Maximizing the Firebase Firestore Import Actor 🚀
 
