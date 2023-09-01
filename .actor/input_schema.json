@@ -33,6 +33,12 @@
             "description": "Dataset ID in Apify to import data from. It can be found in Apify console under Storage -> Datasets -> Dataset ID.",
             "editor": "textfield"
         },
+        "customIdField": {
+            "title": "Custom ID field",
+            "type": "string",
+            "description": "Optional field name to use as a document ID in Firestore. If not provided, the document ID will be generated automatically. It is applied after the transform function. In case of duplicate IDs, the document will be overwritten. Read more in README.",
+            "editor": "textfield"
+        },
         "transformFunction": {
             "title": "Transform function",
             "type": "string",
