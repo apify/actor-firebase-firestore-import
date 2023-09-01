@@ -65,32 +65,9 @@ const logIndexes = Array.from({ length: 10 }, (_, i) => Math.floor((datesetSize 
 
 log.info('Importing items to Firestore collection', { datesetSize });
 
-// const BATCH_SIZE = 500;
-
 // start timer
 const startTime = Date.now();
 /*
-for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
-    // Add all items from dataset to Firestore collection, log every 10% of items
-    await dataset.forEach(async (item, index) => {
-        // apply transform function if defined
-        if (transformFunctionEvaluated) {
-            item = await transformFunctionEvaluated(item);
-        }
-        await addDoc(collectionRef, item);
-
-        // log progress
-        if (logIndexes.includes(index)) {
-            const progressPercent = Math.round(((index + 1) / datesetSize) * 100);
-            log.info(`Import progress: ${progressPercent}%`);
-        }
-    }, {
-        offset: i,
-        limit: BATCH_SIZE,
-    });
-}
-*/
-
 await dataset.forEach(async (item, index) => {
     // apply transform function if defined
     if (transformFunctionEvaluated) {
@@ -104,6 +81,34 @@ await dataset.forEach(async (item, index) => {
         log.info(`Import progress: ${progressPercent}%`);
     }
 });
+*/
+
+const BATCH_SIZE = 1000;
+
+for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
+    // load batch of items from dataset
+    const datasetData = await dataset.getData({
+        offset: i,
+        limit: BATCH_SIZE,
+    });
+
+    let index = i;
+    // add batch of items to Firestore collection
+    for (let item of datasetData.items) {
+        // transform item if transform function is defined
+        if (transformFunctionEvaluated) {
+            item = await transformFunctionEvaluated(item);
+        }
+        await addDoc(collectionRef, item);
+
+        index++;
+
+        if (logIndexes.includes(index)) {
+            const progressPercent = Math.round(((index + 1) / datesetSize) * 100);
+            log.info(`Import progress: ${progressPercent}%`);
+        }
+    }
+}
 
 // end timer
 const endTime = Date.now();
