@@ -65,11 +65,11 @@ const logIndexes = Array.from({ length: 10 }, (_, i) => Math.floor((datesetSize 
 
 log.info('Importing items to Firestore collection', { datesetSize });
 
-const BATCH_SIZE = 500;
+// const BATCH_SIZE = 500;
 
 // start timer
 const startTime = Date.now();
-
+/*
 for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
     // Add all items from dataset to Firestore collection, log every 10% of items
     await dataset.forEach(async (item, index) => {
@@ -89,6 +89,21 @@ for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
         limit: BATCH_SIZE,
     });
 }
+*/
+
+await dataset.forEach(async (item, index) => {
+    // apply transform function if defined
+    if (transformFunctionEvaluated) {
+        item = await transformFunctionEvaluated(item);
+    }
+    await addDoc(collectionRef, item);
+
+    // log progress
+    if (logIndexes.includes(index)) {
+        const progressPercent = Math.round(((index + 1) / datesetSize) * 100);
+        log.info(`Import progress: ${progressPercent}%`);
+    }
+});
 
 // end timer
 const endTime = Date.now();
