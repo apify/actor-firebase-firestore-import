@@ -54,7 +54,7 @@ const collectionRef = collection(db, firestoreCollectionId);
 // eslint-disable-next-line no-eval
 const transformFunctionEvaluated = transformFunction && eval(transformFunction);
 // Check if transform function is correctly defined
-if (typeof transformFunctionEvaluated !== 'function') {
+if (transformFunctionEvaluated && typeof transformFunctionEvaluated !== 'function') {
     const message = 'Transform function is not correctly defined! The specification of the transform function is available in the README.';
     log.error(message, { transformFunction });
     throw new Error(message);
