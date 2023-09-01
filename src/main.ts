@@ -37,17 +37,17 @@ const app = initializeApp({
 // Get Firestore instance
 const db = getFirestore(app);
 
-// Get dataset
+// Open dataset
 log.info('Opening dataset', { datasetId });
-const dataset = await Dataset.open(datasetId);
+const dataset = await Actor.openDataset(datasetId, { forceCloud: true });
 const datasetInfo = await dataset.getInfo();
-if (!datasetInfo) {
-    throw new Error(`Dataset with id: ${datasetId} does not exist!`);
+
+// Check if dataset exists and is not empty
+if (!datasetInfo || !datasetInfo.itemCount) {
+    await Actor.exit();
+    throw new Error(`Dataset ${datasetId} does not exist or is empty!`);
 }
 const datesetSize = datasetInfo.itemCount;
-
-// const dataset = await Actor.openDataset(datasetId, { forceCloud: true });
-// const datasetInfo = await dataset.getInfo();
 
 // Get Firestore collection reference
 log.info('Opening Firestore collection', { firestoreCollectionId });
@@ -66,9 +66,12 @@ log.info('Importing items to Firestore collection', { datesetSize });
 
 // 10 log indexes equaly spreded in dataset
 const logIndexes = Array.from({ length: 10 }, (_, i) => Math.floor((datesetSize / 10) * i));
+log.info('Log indexes', { logIndexes });
 
 // Add all items from dataset to Firestore collection, log every 10% of items
 await dataset.forEach(async (item, index) => {
+    log.info('Importing item', { index });
+
     // apply transform function if defined
     if (transformFunctionEvaluated) {
         item = await transformFunctionEvaluated(item);
