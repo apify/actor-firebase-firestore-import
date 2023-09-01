@@ -12,7 +12,7 @@
         "authDomain": {
             "title": "Auth domain to Firebase",
             "type": "string",
-            "description": "Your auth domain to Firebase. It can be found in Firebase console under Project settings -> Add app -> Web app -> Register app -> Code snippet -> authDomain",
+            "description": "Your auth domain to Firebase. It can be found in Firebase console under Project settings -> Add app -> Web app -> Register app -> Code snippet -> authDomain.",
             "editor": "textfield"
         },
         "projectId": {
