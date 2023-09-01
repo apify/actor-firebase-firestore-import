@@ -57,7 +57,7 @@ if (typeof transformFunctionEvaluated !== 'function') {
 }
 
 // 10 log indexes equaly spreded in dataset
-const logIndexes = Array.from({ length: 10 }, (_, i) => Math.ceil((datesetSize / 10) * i));
+const logIndexes = Array.from({ length: 10 }, (_, i) => Math.ceil((datesetSize / 10) * (i + 1)));
 
 log.info('Importing items to Firestore collection', { datesetSize });
 
