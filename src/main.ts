@@ -1,5 +1,5 @@
 // Apify SDK - toolkit for building Apify Actors (Read more at https://docs.apify.com/sdk/js/)
-import { Actor, log, ApifyClient } from 'apify';
+import { Actor, log } from 'apify';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite';
 
@@ -12,9 +12,6 @@ interface IInput extends Record<string, unknown> {
     datasetId: string;
     transformFunction?: string;
 }
-
-// Batch size for adding items to Firestore collection
-// const BATCH_SIZE = 1000;
 
 // The init() call configures the Actor for its environment. It's recommended to start every Actor with an init()
 await Actor.init();
@@ -35,13 +32,6 @@ const app = initializeApp({
 
 // Get Firestore instance
 const db = getFirestore(app);
-
-const apifyClient = new ApifyClient();
-const d = apifyClient.datasets();
-const dlist = await d.list();
-console.log(dlist);
-const dd = await apifyClient.dataset(datasetId);
-console.log(dd);
 
 // Open dataset
 log.info('Opening dataset', { datasetId });
@@ -88,26 +78,6 @@ await dataset.forEach(async (item, index) => {
         log.info('Imported progress:', { progressPercent });
     }
 });
-
-/*
-// Add all items from dataset to Firestore collection in batches
-for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
-    // load batch of items from dataset
-    const datasetData = await dataset.getData({
-        offset: i,
-        limit: BATCH_SIZE,
-    });
-
-    // add batch of items to Firestore collection
-    for (let item of datasetData.items) {
-        // transform item if transform function is defined
-        if (transformFunctionEvaluated) {
-            item = await transformFunctionEvaluated(item);
-        }
-        await addDoc(collectionRef, item);
-    }
-}
-*/
 
 log.info(`Import finished successfully ✅`);
 
