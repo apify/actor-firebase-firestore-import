@@ -22,7 +22,6 @@ await Actor.init();
 // Get input of the actor
 const input = await Actor.getInput<IInput>();
 if (!input) {
-    await Actor.exit();
     throw new Error('Input is missing!');
 }
 const { apiKey, authDomain, projectId, firestoreCollectionId, datasetId, transformFunction } = input;
@@ -42,12 +41,8 @@ log.info('Opening dataset', { datasetId });
 const dataset = await Actor.openDataset(datasetId, { forceCloud: true });
 const datasetInfo = await dataset.getInfo();
 
-console.log(datasetInfo);
-console.log(datasetInfo!.itemCount);
-
 // Check if dataset exists and is not empty
 if (!datasetInfo || !datasetInfo.itemCount) {
-    await Actor.exit();
     throw new Error(`Dataset ${datasetId} does not exist or is empty!`);
 }
 const datesetSize = datasetInfo.itemCount;
@@ -61,7 +56,6 @@ const collectionRef = collection(db, firestoreCollectionId);
 const transformFunctionEvaluated = transformFunction && eval(transformFunction);
 // Check if transform function is correctly defined
 if (typeof transformFunctionEvaluated !== 'function') {
-    await Actor.exit();
     throw new Error('Transform function is not correctly defined! The specification of the transform function is available in the README.');
 }
 
