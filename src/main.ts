@@ -40,7 +40,9 @@ const datasetInfo = await dataset.getInfo();
 
 // Check if dataset exists and is not empty
 if (!datasetInfo || !datasetInfo.itemCount) {
-    throw new Error(`Dataset ${datasetId} does not exist or is empty!`);
+    const message = 'Dataset does not exist or is empty!';
+    log.error(message, { datasetId });
+    throw new Error(message);
 }
 const datesetSize = datasetInfo.itemCount;
 
@@ -53,29 +55,45 @@ const collectionRef = collection(db, firestoreCollectionId);
 const transformFunctionEvaluated = transformFunction && eval(transformFunction);
 // Check if transform function is correctly defined
 if (typeof transformFunctionEvaluated !== 'function') {
-    throw new Error('Transform function is not correctly defined! The specification of the transform function is available in the README.');
+    const message = 'Transform function is not correctly defined! The specification of the transform function is available in the README.';
+    log.error(message, { transformFunction });
+    throw new Error(message);
 }
 
-// 10 log indexes equaly spreded in dataset
-const logIndexes = Array.from({ length: 10 }, (_, i) => Math.ceil((datesetSize / 10) * i));
+// 10 log indexes equally distributed across the dataset
+const logIndexes = Array.from({ length: 10 }, (_, i) => Math.floor((datesetSize / 10) * (i + 1) - 1));
 
 log.info('Importing items to Firestore collection', { datesetSize });
 
-// Add all items from dataset to Firestore collection, log every 10% of items
-await dataset.forEach(async (item, index) => {
-    // apply transform function if defined
-    if (transformFunctionEvaluated) {
-        item = await transformFunctionEvaluated(item);
-    }
-    await addDoc(collectionRef, item);
+const BATCH_SIZE = 500;
 
-    // log progress
-    if (logIndexes.includes(index)) {
-        const progressPercent = Math.round(((index + 1) / datesetSize) * 100);
-        log.info(`Import progress: ${progressPercent}%`);
-    }
-});
+// start timer
+const startTime = Date.now();
 
-log.info(`Import finished successfully ✅`);
+for (let i = 0; i < datesetSize; i += BATCH_SIZE) {
+    // Add all items from dataset to Firestore collection, log every 10% of items
+    await dataset.forEach(async (item, index) => {
+        // apply transform function if defined
+        if (transformFunctionEvaluated) {
+            item = await transformFunctionEvaluated(item);
+        }
+        await addDoc(collectionRef, item);
+
+        // log progress
+        if (logIndexes.includes(index)) {
+            const progressPercent = Math.round(((index + 1) / datesetSize) * 100);
+            log.info(`Import progress: ${progressPercent}%`);
+        }
+    }, {
+        offset: i,
+        limit: BATCH_SIZE,
+    });
+}
+
+// end timer
+const endTime = Date.now();
+const duration = (endTime - startTime) / 1000;
+log.info(`Import to Firebase Firestore finished successfully ✅`);
+log.info(`Imported ${datesetSize} items in ${duration} seconds`);
 
 await Actor.exit();
