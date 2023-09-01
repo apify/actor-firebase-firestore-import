@@ -1,43 +1,44 @@
 {
-    "title": "Imports data from Apify dataset to Firebase Firestore",
+    "title": "Imports data from Apify dataset into Firebase Firestore collection. Use it to store data collected by other Apify actors to Firebase Firestore.",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
         "apiKey": {
             "title": "API key to Firebase",
             "type": "string",
-            "description": "API key to Firebase",
+            "description": "Your API key to Firebase. It can be found in Firebase console under Project settings -> General -> Web API key.",
             "editor": "textfield"
         },
         "authDomain": {
             "title": "Auth domain to Firebase",
             "type": "string",
-            "description": "Auth domain to Firebase",
+            "description": "Your auth domain to Firebase. It can be found in Firebase console under Project settings -> Add app -> Web app -> Register app -> Code snippet -> authDomain",
             "editor": "textfield"
         },
         "projectId": {
             "title": "Project ID to Firebase",
             "type": "string",
-            "description": "Project ID to Firebase",
+            "description": "Your project ID to Firebase. It can be found in Firebase console under Project settings -> General -> Project ID.",
             "editor": "textfield"
         },
         "firestoreCollectionId": {
             "title": "Firestore collection ID",
             "type": "string",
-            "description": "Firestore collection ID to import data to.",
+            "description": "Firestore collection ID to import data to. It can be found in Firebase console under Firestore Database -> Data. Ensure that the Firebase permissions are set to allow read and write. If the collection does not exist, it will be created.",
             "editor": "textfield"
         },
         "datasetId": {
             "title": "Dataset ID in Apify to import data from",
             "type": "string",
-            "description": "Dataset ID in Apify to import data from.",
+            "description": "Dataset ID in Apify to import data from. It can be found in Apify console under Storage -> Datasets -> Dataset ID.",
             "editor": "textfield"
         },
         "transformFunction": {
             "title": "Transform function",
             "type": "string",
             "description": "Optional transform function to modify data before import. For more info see README.",
-            "editor": "javascript"
+            "editor": "javascript",
+            "prefill": "function (item) {\n    // Here you can modify the item before is inserted to Firestore\n    item;\n}"
         }
     },
     "required": [
