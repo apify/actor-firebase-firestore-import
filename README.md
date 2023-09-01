@@ -28,6 +28,7 @@ The actor accepts the following input settings:
 | `datasetId`                    | Dataset ID in Apify to import data from. It can be found in Apify console under **Storage** -> **Datasets** -> **Dataset ID**.                                                                                                                                                                                         |
 | `customIdField` (optional)     | Name of the field in the dataset to use as the document ID in Firestore. If not specified, Firestore will automatically generate a unique ID for each document. Note that this field must be unique for each item in the dataset or the document will be overwritten. It is applied after the transformation function. |
 | `transformFunction` (optional) | An optional custom transformation function to apply to the data before importing it. To learn more about this, see [below](#transformation-function).                                                                                                                                                                  |
+|                                |
 
 
 
