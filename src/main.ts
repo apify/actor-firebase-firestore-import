@@ -1,5 +1,5 @@
 // Apify SDK - toolkit for building Apify Actors (Read more at https://docs.apify.com/sdk/js/)
-import { Actor, log } from 'apify';
+import { Actor, log, ApifyClient } from 'apify';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite';
 
@@ -35,6 +35,13 @@ const app = initializeApp({
 
 // Get Firestore instance
 const db = getFirestore(app);
+
+const apifyClient = new ApifyClient();
+const d = apifyClient.datasets();
+const dlist = await d.list();
+console.log(dlist);
+const dd = await apifyClient.dataset(datasetId);
+console.log(dd);
 
 // Open dataset
 log.info('Opening dataset', { datasetId });
