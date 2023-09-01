@@ -56,16 +56,13 @@ if (typeof transformFunctionEvaluated !== 'function') {
     throw new Error('Transform function is not correctly defined! The specification of the transform function is available in the README.');
 }
 
-log.info('Importing items to Firestore collection', { datesetSize });
-
 // 10 log indexes equaly spreded in dataset
-const logIndexes = Array.from({ length: 10 }, (_, i) => Math.floor((datesetSize / 10) * i));
-log.info('Log indexes', { logIndexes });
+const logIndexes = Array.from({ length: 10 }, (_, i) => Math.ceil((datesetSize / 10) * i));
+
+log.info('Importing items to Firestore collection', { datesetSize });
 
 // Add all items from dataset to Firestore collection, log every 10% of items
 await dataset.forEach(async (item, index) => {
-    log.info('Importing item', { index });
-
     // apply transform function if defined
     if (transformFunctionEvaluated) {
         item = await transformFunctionEvaluated(item);
@@ -75,7 +72,7 @@ await dataset.forEach(async (item, index) => {
     // log progress
     if (logIndexes.includes(index)) {
         const progressPercent = Math.round((index / datesetSize) * 100);
-        log.info('Imported progress:', { progressPercent });
+        log.info(`Import progress: ${progressPercent}%`);
     }
 });
 
