@@ -57,7 +57,7 @@ if (typeof transformFunctionEvaluated !== 'function') {
 }
 
 // 10 log indexes equaly spreded in dataset
-const logIndexes = Array.from({ length: 10 }, (_, i) => Math.ceil((datesetSize / 10) * (i + 1)));
+const logIndexes = Array.from({ length: 10 }, (_, i) => Math.ceil((datesetSize / 10) * i));
 
 log.info('Importing items to Firestore collection', { datesetSize });
 
@@ -71,7 +71,7 @@ await dataset.forEach(async (item, index) => {
 
     // log progress
     if (logIndexes.includes(index)) {
-        const progressPercent = Math.round((index / datesetSize) * 100);
+        const progressPercent = Math.round(((index + 1) / datesetSize) * 100);
         log.info(`Import progress: ${progressPercent}%`);
     }
 });
